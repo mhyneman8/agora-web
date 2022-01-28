@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// App.js
+import React, { Component } from "react";
+import ChannelForm from "./components/ChannelForm";
+import Call from './components/Call';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      channel: ''
+    }
+  }
+
+  selectChannel = channel => {
+    this.setState({ channel });
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <ChannelForm selectChannel={this.selectChannel} />
+        <Call channel={this.state.channel} />
+      </div>
+    );
+  }
 }
 
 export default App;
