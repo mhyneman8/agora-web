@@ -105,6 +105,22 @@ export default class Call extends Component {
         );
     };
 
+    handleCamera = (e) => {
+        e.currentTarget.classList.toggle('off');
+        this.localStream.isVideoOn() ?
+            this.localStream.disableVideo() :
+            this.localStream.enableVideo();
+            console.log("camera toggle")
+    };
+
+    handleMic = (e) => {
+        e.currentTarget.classList.toggle('off');
+        this.localStream.isAudioOn() ?
+            this.localStream.disableAudio() :
+            this.localStream.enableAudio();
+            console.log("mic toggle")
+    }
+ 
     onStreamRemoved = evt => {
         let me = this;
         let stream = evt.stream;
@@ -154,13 +170,19 @@ export default class Call extends Component {
                     let stream = this.state.remoteStreams[key];
                     let streamId = stream.getId();
                     return (
-                        <div    
-                            key={streamId}
-                            id={`agora_remote ${streamId}`}
-                            style={{ width: "400px", height: "400px" }}
-                        />
+                        <div>
+
+                            <div    
+                                key={streamId}
+                                id={`agora_remote ${streamId}`}
+                                style={{ width: "400px", height: "400px" }}
+                            />
+                            
+                        </div>
                     );
                 })}
+                <button onClick={this.handleMic}>Mic</button> 
+                <button onClick={this.handleCamera}>Video</button>
             </div>
         )
     }
